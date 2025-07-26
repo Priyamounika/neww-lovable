@@ -1,8 +1,7 @@
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
-:root {
+  :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -23,9 +22,9 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
-}
+  }
 
-.dark {
+  .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -50,12 +49,12 @@
 
 @layer base {
   * {
-    /* Remove border-border or border-gray-200, as Tailwind v4 does not support them by default */
-    /* If you want a border on all elements, use @apply border; otherwise, leave this empty. */
-    /* @apply border; */
+    border-color: theme(colors.border);
   }
+  
   body {
-    @apply bg-white text-gray-900;
+    background-color: theme(colors.background);
+    color: theme(colors.foreground);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -177,61 +176,151 @@ html {
 
 /* Custom button styles */
 .btn-primary {
-  @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
 }
 
 .btn-secondary {
-  @apply bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-full font-semibold hover:bg-white/20 transition-all duration-300 border border-white/20;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Section spacing */
 .section-padding {
-  @apply py-20;
+  padding: 5rem 0;
 }
 
 /* Container max width */
 .container {
-  @apply max-w-7xl mx-auto px-4;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* Responsive typography */
 .text-responsive {
-  @apply text-2xl md:text-3xl lg:text-4xl xl:text-5xl;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .text-responsive {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .text-responsive {
+    font-size: 3rem;
+  }
 }
 
 /* Card hover effects */
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+  transition: all 0.3s;
+}
+
+.card-hover:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-0.5rem);
 }
 
 /* Image hover effects */
 .image-hover {
-  @apply transition-transform duration-500 hover:scale-110;
+  transition: transform 0.5s;
+}
+
+.image-hover:hover {
+  transform: scale(1.1);
 }
 
 /* Link hover effects */
 .link-hover {
-  @apply transition-colors duration-200 hover:text-blue-600;
+  transition: color 0.2s;
+}
+
+.link-hover:hover {
+  color: #3b82f6;
 }
 
 /* Form input styles */
 .form-input {
-  @apply w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  color: white;
+}
+
+.form-input::placeholder {
+  color: rgba(156, 163, 175, 1);
+}
+
+.form-input:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  border-color: transparent;
 }
 
 /* Progress bar styles */
 .progress-bar {
-  @apply bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-1000;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  height: 0.75rem;
+  border-radius: 9999px;
+  transition: all 1s;
 }
 
 /* Social media icons */
 .social-icon {
-  @apply w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #374151;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.social-icon:hover {
+  background: #3b82f6;
 }
 
 /* Navigation styles */
 .nav-link {
-  @apply text-sm font-medium transition-colors duration-200 hover:text-blue-600;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #3b82f6;
 }
 
 /* Hero section styles */
@@ -241,20 +330,47 @@ html {
 
 /* Service card styles */
 .service-card {
-  @apply bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100;
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  border: 1px solid #f3f4f6;
+}
+
+.service-card:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 /* Portfolio item styles */
 .portfolio-item {
-  @apply relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.portfolio-item:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 /* Contact form styles */
 .contact-form {
-  @apply bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Footer styles */
 .footer-link {
-  @apply text-gray-300 hover:text-blue-400 transition-colors duration-200;
+  color: #d1d5db;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: #60a5fa;
 }
